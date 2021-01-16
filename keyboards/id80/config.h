@@ -65,9 +65,19 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define BACKLIGHT_BREATHING
 #define BACKLIGHT_LEVELS 3
 
+// 300ms feel better with blues
+#define TAPPING_TERM 300
+#define LEADER_TIMEOUT 250
+
+// Makes anything combo more forgiving
+#define LEADER_PER_KEY_TIMING
+#define PERMISSIVE_HOLD
+
+#define IS_COMMAND() (get_mods() == MOD_MASK_ALT) // POK3R style
+
 #define CAPS_LOCK_LED_PIN C7
 
-#define RGB_DI_PIN E2
+#undef RGB_DI_PIN // Having the LEDs on the bottom without seeing them?
 #ifdef RGB_DI_PIN
     #define RGBLED_NUM 20       /* 16 underglow LEDs, 4 top LEDs */
     #define RGBLIGHT_HUE_STEP 8
@@ -88,7 +98,3 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //    #define RGBLIGHT_EFFECT_RGB_TEST
 //    #define RGBLIGHT_EFFECT_ALTERNATING
 #endif
-
-/* Bootmagic Lite key configuration: use the Esc key */
-#define BOOTMAGIC_LITE_ROW      0
-#define BOOTMAGIC_LITE_COLUMN   5
