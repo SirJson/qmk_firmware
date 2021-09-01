@@ -34,7 +34,7 @@ void custom_set_layercolor(void);
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [0] = LAYOUT(
-        KC_MS_BTN1, KC_MS_BTN3, KC_MS_BTN2,
+        KC_MS_BTN1, KC_MS_BTN2, KC_MS_BTN3,
         KC_F13, KC_W,KC_F14,
         KC_A, KC_S, KC_D
     ),
@@ -106,7 +106,7 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
             }
         }
     }
-    else if (index == _RIGHT) {
+    else if (index == _MIDDLE) {
         if(_layernum == _LAYER_MEDIA) {
             if (clockwise) {
                 tap_code(KC_MNXT);
@@ -122,7 +122,7 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
             }
         }
     }
-    else if (index == _MIDDLE) {
+    else if (index == _RIGHT) {
         if (clockwise) {
             _layernum = _layernum + 1;
             if(_layernum > _LAYER_IDX_MAX) {
