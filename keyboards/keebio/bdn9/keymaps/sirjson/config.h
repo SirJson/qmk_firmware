@@ -3,7 +3,19 @@
 #define RGBLIGHT_ANIMATIONS
 #define MK_3_SPEED
 #define MOUSEKEY_MOVE_DELTA 30
+#define MOUSEKEY_MAX_SPEED 90
+#define MOUSEKEY_DELAY 150
+#define MOUSEKEY_INTERVAL 25
 
 #ifdef RGB_MATRIX_ENABLE
 #    define RGB_MATRIX_KEYPRESSES
 #endif
+
+
+
+
+
+
+
+
+
