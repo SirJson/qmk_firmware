@@ -46,6 +46,7 @@
 // Locked key state. This is an array of 256 bits, one for each of the standard keys supported qmk.
 uint64_t key_state[4] = {0x0, 0x0, 0x0, 0x0};
 bool     watching     = false;
+bool     g_lock_repeating    = false;
 
 // Translate any OSM keycodes back to their unmasked versions.
 static inline uint16_t translate_keycode(uint16_t keycode) {
@@ -58,6 +59,7 @@ static inline uint16_t translate_keycode(uint16_t keycode) {
 
 void cancel_key_lock(void) {
     watching = false;
+    g_lock_repeating = false;
     UNSET_KEY_STATE(0x0);
 }
 
@@ -114,15 +116,18 @@ bool process_key_lock(uint16_t *keycode, keyrecord_t *record) {
             if (watching) {
                 watching = false;
                 SET_KEY_STATE(translated_keycode);
+                g_lock_repeating = true;
                 // We need to set the keycode passed in to be the translated keycode, in case we
                 // translated a OSM back to the original keycode.
                 *keycode = translated_keycode;
                 // Let the standard keymap send the keycode down event. The up event will be masked.
+
                 return true;
             }
 
             if (KEY_STATE(translated_keycode)) {
                 UNSET_KEY_STATE(translated_keycode);
+                g_lock_repeating = false;
                 // The key is already held, stop this process. The up event will be sent when the user
                 // releases the key.
                 return false;
